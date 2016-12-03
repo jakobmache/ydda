@@ -4,9 +4,15 @@ public class You {
 	int points;
 	PersonalQuest personalQuest;
 	Car rentedCar;
+	int currentXP;
 	
 	public You() {
 		points = 0;
+		currentXP = 0;
+	}
+	
+	void setCurrentXP() {
+		currentXP = getPersonalQuest().getBar().getCurrentXP() + getFriendQuest().getBar().getCurrentXP();
 	}
 	
 	void completePersonalQuest(String name, String description, int xpForPoints, int pointValue) {

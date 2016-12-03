@@ -1,5 +1,6 @@
 package de.mobilityhacks.ydda.youdontdrivealone;
 
+//this class is for the friend quests
 public class Friend extends Person {
 	
 	String getName() {

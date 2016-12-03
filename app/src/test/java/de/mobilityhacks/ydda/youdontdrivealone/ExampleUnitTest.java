@@ -2,6 +2,8 @@ package de.mobilityhacks.ydda.youdontdrivealone;
 
 import org.junit.Test;
 
+import de.mobilityhacks.ydda.youdontdrivealone.car.OTPAdapter;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,6 +14,7 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+        OTPAdapter adapter = new OTPAdapter();
+        adapter.getRpm();
     }
 }

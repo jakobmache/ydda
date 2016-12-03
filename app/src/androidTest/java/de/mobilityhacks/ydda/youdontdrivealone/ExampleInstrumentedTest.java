@@ -7,6 +7,8 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.mobilityhacks.ydda.youdontdrivealone.car.OTPAdapter;
+
 import static org.junit.Assert.*;
 
 /**
@@ -21,6 +23,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("de.mobilityhacks.ydda.youdontdrivealone", appContext.getPackageName());
+
     }
 }

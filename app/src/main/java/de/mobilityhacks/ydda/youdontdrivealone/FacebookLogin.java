@@ -5,8 +5,14 @@ package de.mobilityhacks.ydda.youdontdrivealone;
  */
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.hardware.camera2.params.Face;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -20,10 +26,15 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class FacebookLogin extends AppCompatActivity {
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
     private ProfileTracker profileTracker;
+
+    public static final String TAG = FacebookLogin.class.getName();
 
     //Login button
     private FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
@@ -40,8 +51,8 @@ public class FacebookLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
+
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
@@ -62,6 +73,7 @@ public class FacebookLogin extends AppCompatActivity {
         //FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_facebook_login);
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
+        Log.d(TAG, "Starting callback...");
         callback = new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -76,8 +88,10 @@ public class FacebookLogin extends AppCompatActivity {
 
             @Override
             public void onError(FacebookException e) {
+                Log.e(TAG, e.getMessage());
             }
         };
+
         loginButton.setReadPermissions("user_friends");
         loginButton.registerCallback(callbackManager, callback);
     }
@@ -111,6 +125,7 @@ public class FacebookLogin extends AppCompatActivity {
     }
     private void nextActivity(Profile profile){
         if(profile != null){
+            Log.d(TAG, "Next activity");
             Intent main = new Intent(FacebookLogin.this, MainActivity.class);
             main.putExtra("name", profile.getFirstName());
             main.putExtra("surname", profile.getLastName());

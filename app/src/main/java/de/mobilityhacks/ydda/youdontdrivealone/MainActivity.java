@@ -1,6 +1,6 @@
 package de.mobilityhacks.ydda.youdontdrivealone;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,21 +10,25 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.facebook.AccessToken;
-import com.facebook.FacebookSdk;
+import java.io.IOException;
 
-import de.mobilityhacks.ydda.youdontdrivealone.car.FetchOTPDataTask;
-import de.mobilityhacks.ydda.youdontdrivealone.car.OTPAdapter;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.FriendsFr;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.QuestsFr;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.RankingFr;
+import de.mobilityhacks.ydda.youdontdrivealone.utils.FacebookUtils;
+import de.mobilityhacks.ydda.youdontdrivealone.utils.ProfilePictureView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,17 +37,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
-
-        // Initialize the SDK before executing any other operations,
-
-        //AppEventsLogger.activateApp(this, "1844633655785074");
-
-        if(isLoggedIn()) {
-            Intent intent = new Intent(this, FacebookLogin.class);
-            startActivity(intent);
-        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -67,9 +61,29 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        OTPAdapter adapter = new OTPAdapter();
-        FetchOTPDataTask task = new FetchOTPDataTask(getApplicationContext());
-        task.execute(adapter);
+        //Now load facebook data
+
+        if (getIntent().getStringExtra("name") != null
+                && getIntent().getStringExtra("surname") != null) {
+            TextView userNameText = (TextView) navigationView.getHeaderView(0).
+                    findViewById(R.id.username);
+            userNameText.setText(getIntent().getStringExtra("name").toString() + " " +
+                    getIntent().getStringExtra("surname").toString());
+        }
+
+        if (getIntent().getStringExtra("userId") != null) {
+            ProfilePictureView imageView = (ProfilePictureView) navigationView.getHeaderView(0).
+                    findViewById(R.id.user_image_view);
+            try {
+                new FacebookUtils().setFacebookProfilePicture(
+                        getIntent().getStringExtra("userId"), imageView);
+            }
+            catch (IOException e) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        getString(R.string.load_user_failed), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
     }
 
     @Override
@@ -129,8 +143,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public boolean isLoggedIn() {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        return accessToken != null;
-    }
+
+
 }

@@ -11,4 +11,6 @@
     <string name="ranking">Ranking</string>
     <string name="quests">Quests</string>
 
+    <string name="load_user_failed">Could not load user!</string>
+
 </resources>

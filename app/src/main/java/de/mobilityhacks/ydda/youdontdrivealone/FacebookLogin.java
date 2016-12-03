@@ -5,117 +5,88 @@ package de.mobilityhacks.ydda.youdontdrivealone;
  */
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
-import com.facebook.ProfileTracker;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 public class FacebookLogin extends AppCompatActivity {
-    private CallbackManager callbackManager;
-    private AccessTokenTracker accessTokenTracker;
-    private ProfileTracker profileTracker;
 
-    //Login button
-    private FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
-        @Override
-        public void onSuccess(LoginResult loginResult) {
-            Profile profile = Profile.getCurrentProfile();
-            nextActivity(profile);
-        }
-        @Override
-        public void onCancel() {        }
-        @Override
-        public void onError(FacebookException e) {      }
-    };
+    public static final String TAG = FacebookLogin.class.getName();
+
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        FacebookSdk.sdkInitialize(getApplicationContext());
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
-        accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken newToken) {
-            }
-        };
 
-        profileTracker = new ProfileTracker() {
-            @Override
-            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
-                nextActivity(newProfile);
-            }
-        };
-        accessTokenTracker.startTracking();
-        profileTracker.startTracking();
-        //FacebookSdk.sdkInitialize(getApplicationContext());
-        setContentView(R.layout.activity_facebook_login);
-        LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
-        callback = new FacebookCallback<LoginResult>() {
+        AppEventsLogger.activateApp(this);
+
+        setContentView(R.layout.facebooklogin);
+
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                AccessToken accessToken = loginResult.getAccessToken();
-                Profile profile = Profile.getCurrentProfile();
-                nextActivity(profile);
-                Toast.makeText(getApplicationContext(), "Logging in...", Toast.LENGTH_SHORT).show();    }
+                Log.d(TAG, "Successfully logged in!");
+                nextActivity(Profile.getCurrentProfile());
+            }
 
             @Override
             public void onCancel() {
+                Log.e(TAG, "Login cancelled");
             }
 
             @Override
-            public void onError(FacebookException e) {
+            public void onError(FacebookException error) {
+                Log.e(TAG, error.getMessage());
             }
-        };
-        loginButton.setReadPermissions("user_friends");
-        loginButton.registerCallback(callbackManager, callback);
+        });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        //Facebook login
-        Profile profile = Profile.getCurrentProfile();
-        nextActivity(profile);
-    }
-
-    @Override
-    protected void onPause() {
-
-        super.onPause();
-    }
-
-    protected void onStop() {
-        super.onStop();
-        //Facebook login
-        accessTokenTracker.stopTracking();
-        profileTracker.stopTracking();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
-        super.onActivityResult(requestCode, responseCode, intent);
-        //Facebook login
-        callbackManager.onActivityResult(requestCode, responseCode, intent);
-
-    }
-    private void nextActivity(Profile profile){
-        if(profile != null){
-            Intent main = new Intent(FacebookLogin.this, MainActivity.class);
-            main.putExtra("name", profile.getFirstName());
-            main.putExtra("surname", profile.getLastName());
-            main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
-            startActivity(main);
+        if (isLoggedIn()) {
+            nextActivity(Profile.getCurrentProfile());
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public boolean isLoggedIn() {
+        return AccessToken.getCurrentAccessToken() != null &&
+                !AccessToken.getCurrentAccessToken().isExpired();
+    }
+
+    private void nextActivity(Profile profile){
+        Log.d(TAG, "Start next activity!");
+        if(profile != null){
+            Intent main = new Intent(this, MainActivity.class);
+            main.putExtra("name", profile.getFirstName());
+            main.putExtra("surname", profile.getLastName());
+            main.putExtra("userId", profile.getId());
+            startActivity(main);
+            Log.d(TAG, "Started new activity!");
+        }
+    }
+
 }

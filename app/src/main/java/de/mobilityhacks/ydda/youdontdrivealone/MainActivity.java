@@ -1,9 +1,16 @@
 package de.mobilityhacks.ydda.youdontdrivealone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+<<<<<<< HEAD
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+=======
 import android.util.Log;
+>>>>>>> master
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +21,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+<<<<<<< HEAD
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
+
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+    Fragment f = null;
+=======
 import de.mobilityhacks.ydda.youdontdrivealone.car.FetchOTPDataTask;
 import de.mobilityhacks.ydda.youdontdrivealone.car.OTPAdapter;
 
@@ -22,9 +39,21 @@ public class MainActivity extends AppCompatActivity
 
     public static final String TAG = MainActivity.class.getName();
 
+>>>>>>> master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
+
+        // Initialize the SDK before executing any other operations,
+
+        //AppEventsLogger.activateApp(this, "1844633655785074");
+
+        if(isLoggedIn()) {
+            Intent intent = new Intent(this, FacebookLogin.class);
+            startActivity(intent);
+        }
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -90,22 +119,26 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.friendsIt) {
+            f = new FriendsFr();
+        } else if (id == R.id.rankingIt) {
+            f = new RankingFr();
+        } else if (id == R.id.questsIt) {
+            f = new QuestsFr();
         }
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.content_main, f);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 }

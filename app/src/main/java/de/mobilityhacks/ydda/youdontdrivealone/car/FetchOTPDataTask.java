@@ -18,7 +18,7 @@ public class FetchOTPDataTask extends AsyncTask<OTPAdapter, Void, Short>{
     protected Short doInBackground(OTPAdapter... adapter) {
         try {
             OTPAdapter usedAdapter = adapter[0];
-            return usedAdapter.getRpm(context);
+            return usedAdapter.getShortProperty("rpm", Short.valueOf(new Integer(1000).toString()));
         }
         catch (Exception e) {
             exception = e;

@@ -10,4 +10,8 @@ public class Person {
 		friendQuest = new FriendQuest(name, decription, xpForPoints, pointValue);
 	}
 
+	int getAbsoluteXP() {
+		return absoluteXP;
+	}
+	
 }

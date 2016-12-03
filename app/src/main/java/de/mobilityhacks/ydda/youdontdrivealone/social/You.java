@@ -1,5 +1,7 @@
 package de.mobilityhacks.ydda.youdontdrivealone.social;
 
+import de.mobilityhacks.ydda.youdontdrivealone.Car;
+
 public class You {
 	int points;
 	PersonalQuest personalQuest;

@@ -11,6 +11,6 @@ public class QuestAvg extends Quest {
     public QuestAvg() {
         name = "@string/QuestAvg";
         description = "@string/QuestAvgDesc";
-        type = super.computeType();
+        type = Quest.computeType();
     }
 }

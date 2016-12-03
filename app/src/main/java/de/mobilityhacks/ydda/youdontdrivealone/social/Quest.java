@@ -56,7 +56,8 @@ public class Quest {
     public String getDesc() {
         return description;
     }
-    public String computeType() {
+
+    public static String computeType() {
         Random r = new Random();
         double t = r.nextDouble();
         if (t <= 0.5) {

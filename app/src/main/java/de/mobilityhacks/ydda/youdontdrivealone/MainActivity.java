@@ -1,6 +1,5 @@
 package de.mobilityhacks.ydda.youdontdrivealone;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,24 +9,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
 
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.FriendsFr;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.QuestsFr;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.RankingFr;
-import de.mobilityhacks.ydda.youdontdrivealone.utils.FacebookUtils;
 import de.mobilityhacks.ydda.youdontdrivealone.utils.ProfilePictureView;
 
 public class MainActivity extends AppCompatActivity
@@ -74,15 +66,8 @@ public class MainActivity extends AppCompatActivity
         if (getIntent().getStringExtra("userId") != null) {
             ProfilePictureView imageView = (ProfilePictureView) navigationView.getHeaderView(0).
                     findViewById(R.id.user_image_view);
-            try {
-                new FacebookUtils().setFacebookProfilePicture(
-                        getIntent().getStringExtra("userId"), imageView);
-            }
-            catch (IOException e) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        getString(R.string.load_user_failed), Toast.LENGTH_SHORT);
-                toast.show();
-            }
+                imageView.setProfileId(getIntent().getStringExtra("userId"));
+                imageView.setPresetSize(ProfilePictureView.CUSTOM);
         }
     }
 
@@ -135,7 +120,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.content_main, f);
+        transaction.replace(R.id.content_frame, f);
         transaction.addToBackStack(null);
         transaction.commit();
 

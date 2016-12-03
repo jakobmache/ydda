@@ -18,5 +18,6 @@
     <string name="questPercentageDesc">Drive X percent better than the average user</string>
 
     <string name="load_user_failed">Could not load user!</string>
+    <string name="no_friends">Ouuh seems that you have no friends :)</string>
 
 </resources>

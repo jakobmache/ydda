@@ -11,6 +11,6 @@ public class QuestKms extends Quest {
     public QuestKms() {
         name = "@string/QuestKms";
         description = "@string/QuestKmsDesc";
-        type = super.computeType();
+        type = Quest.computeType();
     }
 }

@@ -30,10 +30,9 @@ import com.facebook.internal.Utility;
 
 import de.mobilityhacks.ydda.youdontdrivealone.R;
 
-/**
- * View that displays the profile photo of a supplied profile ID, while conforming
- * to user specified dimensions.
- */
+
+//Source: http://stackoverflow.com/questions/23464707/display-fb-profile-pic-in-circular-image-view-in-application
+
 public class ProfilePictureView extends FrameLayout {
 
     /**

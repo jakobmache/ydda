@@ -1,8 +1,5 @@
 package de.mobilityhacks.ydda.youdontdrivealone.social;
 
-/**
- *
- */
 
 public class QuestPercentage extends Quest {
     String name;
@@ -11,6 +8,6 @@ public class QuestPercentage extends Quest {
     public QuestPercentage() {
         name="@string/QuestPercentage";
         description = "@string/QuestPercentageDesc";
-        type = super.computeType();
+        type = Quest.computeType();
     }
 }

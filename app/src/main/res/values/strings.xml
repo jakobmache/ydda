@@ -10,6 +10,12 @@
     <string name="friends">Friends</string>
     <string name="ranking">Ranking</string>
     <string name="quests">Quests</string>
+    <string name="questAvg">Better than Average</string>
+    <string name="questAvgDesc">Drive under X percent of the average consumption per kilometer</string>
+    <string name="questKms">Get your kilometers</string>
+    <string name="questKmsDesc">Drive the distance X percent under average</string>
+    <string name="questPercent">Overachiever</string>
+    <string name="questPercentageDesc">Drive X percent better than the average user</string>
 
     <string name="load_user_failed">Could not load user!</string>
 

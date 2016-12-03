@@ -38,16 +38,18 @@ public class Quest {
      * @return a subclass of the Quest class
      */
     public Quest factory() {
-        Random r = new Random();
-        double q = r.nextDouble();
-        if (q < 0.33) {
+        String q = compQuest();
+        if (q.equals("Avg")) {
             return new QuestAvg();
         }
-        else if (q < 0.67) {
+        else if (q.equals("Kms")) {
             return new QuestKms();
         }
-        else {
+        else if (q.equals("Percentage")){
             return new QuestPercentage();
+        }
+        else {
+            return null;
         }
     }
     public String getName() {
@@ -56,7 +58,19 @@ public class Quest {
     public String getDesc() {
         return description;
     }
-
+    public static String compQuest() {
+        Random r = new Random();
+        double q = r.nextDouble();
+        if (q < 0.33) {
+            return "Avg";
+        }
+        else if (q < 0.67) {
+            return "Kms";
+        }
+        else {
+            return "Percentage";
+        }
+    }
     public static String computeType() {
         Random r = new Random();
         double t = r.nextDouble();

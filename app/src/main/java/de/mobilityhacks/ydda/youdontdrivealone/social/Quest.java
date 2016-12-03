@@ -1,4 +1,6 @@
-package de.mobilityhacks.ydda.youdontdrivealone;
+package de.mobilityhacks.ydda.youdontdrivealone.social;
+
+import de.mobilityhacks.ydda.youdontdrivealone.social.Bar;
 
 //quests in general (super class for personal quest and friend quest)
 public class Quest {

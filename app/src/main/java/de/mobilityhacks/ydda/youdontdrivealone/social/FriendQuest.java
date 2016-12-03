@@ -1,4 +1,4 @@
-package de.mobilityhacks.ydda.youdontdrivealone;
+package de.mobilityhacks.ydda.youdontdrivealone.social;
 
 //quests for yourself and friends
 public class FriendQuest extends Quest {

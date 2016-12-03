@@ -1,4 +1,4 @@
-package de.mobilityhacks.ydda.youdontdrivealone;
+package de.mobilityhacks.ydda.youdontdrivealone.social;
 
 //This bar is supposed to represent the progress
 public class Bar {

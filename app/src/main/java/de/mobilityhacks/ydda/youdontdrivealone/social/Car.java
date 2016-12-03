@@ -1,4 +1,4 @@
-package de.mobilityhacks.ydda.youdontdrivealone;
+package de.mobilityhacks.ydda.youdontdrivealone.social;
 
 //representing the cars that can be rented
 public class Car {

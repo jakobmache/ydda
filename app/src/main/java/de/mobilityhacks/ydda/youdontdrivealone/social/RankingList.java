@@ -1,6 +1,5 @@
-package de.mobilityhacks.ydda.youdontdrivealone;
+package de.mobilityhacks.ydda.youdontdrivealone.social;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RankingList {
 	ArrayList<Person> unsorted = new ArrayList<Person>();

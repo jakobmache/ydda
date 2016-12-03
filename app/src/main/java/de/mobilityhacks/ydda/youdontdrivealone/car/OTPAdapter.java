@@ -1,32 +1,5 @@
 package de.mobilityhacks.ydda.youdontdrivealone.car;
 
-<<<<<<< HEAD
-import java.net.MalformedURLException;
-import java.net.URL;
-
-public class OTPAdapter
-{
-    private static final String IP = "192.168.189.99:9080/";
-
-    public static final String TAG = OTPAdapter.class.getName();
-
-    public short getFuelLevel() {
-        try {
-            URL url = new URL(IP + "vehicle?fields=level_fuel");
-        }
-        catch(MalformedURLException exc) {
-        }
-
-        return 0;
-
-=======
-import android.util.Log;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-
 public class OTPAdapter
 {
     private static final String IP = "http://192.168.189.99:9080/";
@@ -64,6 +37,5 @@ public class OTPAdapter
     public byte getByteProperty(byte value) {
         //Hardcoded value (same as short value)
         return value;
->>>>>>> master
     }
 }

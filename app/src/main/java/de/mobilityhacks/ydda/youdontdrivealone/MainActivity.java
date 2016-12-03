@@ -3,16 +3,11 @@ package de.mobilityhacks.ydda.youdontdrivealone;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-<<<<<<< HEAD
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-=======
-import android.util.Log;
->>>>>>> master
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,26 +15,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-<<<<<<< HEAD
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
-
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    Fragment f = null;
-=======
 import de.mobilityhacks.ydda.youdontdrivealone.car.FetchOTPDataTask;
 import de.mobilityhacks.ydda.youdontdrivealone.car.OTPAdapter;
+import de.mobilityhacks.ydda.youdontdrivealone.fragments.FriendsFr;
+import de.mobilityhacks.ydda.youdontdrivealone.fragments.QuestsFr;
+import de.mobilityhacks.ydda.youdontdrivealone.fragments.RankingFr;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String TAG = MainActivity.class.getName();
 
->>>>>>> master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -113,11 +104,12 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
+        Fragment f = null;
 
         if (id == R.id.friendsIt) {
             f = new FriendsFr();

@@ -1,4 +1,4 @@
-package de.mobilityhacks.ydda.youdontdrivealone;
+package de.mobilityhacks.ydda.youdontdrivealone.social;
 
 //this class is for the friend quests
 public class Friend extends Person {

@@ -1,4 +1,4 @@
-package de.mobilityhacks.ydda.youdontdrivealone;
+package de.mobilityhacks.ydda.youdontdrivealone.social;
 
 public class You {
 	int points;

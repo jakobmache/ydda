@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/YouDontDriveAlone.iml" filepath="$PROJECT_DIR$/YouDontDriveAlone.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-=======
->>>>>>> master
       <module fileurl="file://$PROJECT_DIR$/ydda.iml" filepath="$PROJECT_DIR$/ydda.iml" />
     </modules>
   </component>

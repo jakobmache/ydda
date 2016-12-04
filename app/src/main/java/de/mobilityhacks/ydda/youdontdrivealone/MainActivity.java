@@ -1,5 +1,6 @@
 package de.mobilityhacks.ydda.youdontdrivealone;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +28,8 @@ import java.io.IOException;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.FriendsFr;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.QuestsFr;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.RankingFr;
+import de.mobilityhacks.ydda.youdontdrivealone.social.Quest;
+import de.mobilityhacks.ydda.youdontdrivealone.social.QuestCreate;
 import de.mobilityhacks.ydda.youdontdrivealone.utils.FacebookUtils;
 import de.mobilityhacks.ydda.youdontdrivealone.utils.ProfilePictureView;
 
@@ -34,6 +37,14 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String TAG = MainActivity.class.getName();
+    public String questAvgName = getString(R.string.questAvg);
+    public String questKmsName = getString(R.string.questKms);
+    public String questPercentageName = getString(R.string.questPercentage);
+
+    public String questAvgDesc = getString(R.string.questAvgDesc);
+    public String questKmsDesc = getString(R.string.questKmsDesc);
+    public String questPercentageDesc = getString(R.string.questPercentageDesc);
+    public QuestCreate questCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +71,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        questCreate = new QuestCreate(this);
 
         //Now load facebook data
 
@@ -143,6 +156,28 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
+    public QuestCreate getQuestCreate() {
+        return questCreate;
+    }
+    /*public Quest create() {
+        return QuestCreate.createQuest(this);
+    }*/
+    /*public String getQuestAvgName() {
+        return questAvgName;
+    }
+    public String getQuestKmsName() {
+        return questKmsName;
+    }
+    public String getPercentageName() {
+        return questPercentageName;
+    }
+    public String getQuestAvgDesc() {
+        return questAvgDesc;
+    }
+    public String getQuestKmsDesc() {
+        return questKmsDesc;
+    }
+    public String getPercentageDesc() {
+        return questPercentageDesc;
+    }*/
 }

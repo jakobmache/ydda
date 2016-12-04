@@ -11,11 +11,12 @@
     <string name="ranking">Ranking</string>
     <string name="quests">Quests</string>
     <string name="questAvg">Better than Average</string>
-    <string name="questAvgDesc">Drive under X percent of the average consumption per kilometer</string>
+    <string name="questAvgDesc">Try to reduce your emissions X percent under the average level
+        per kilometer for one day.</string>
     <string name="questKms">Get your kilometers</string>
-    <string name="questKmsDesc">Drive the distance X percent under average</string>
+    <string name="questKmsDesc">Drive the distance X km 15 percent under average.</string>
     <string name="questPercentage">Overachiever</string>
-    <string name="questPercentageDesc">Drive X percent better than the average user</string>
+    <string name="questPercentageDesc">Produce X percent less emissions per day.</string>
 
     <string name="load_user_failed">Could not load user!</string>
     <string name="no_friends">Ouuh seems that you have no friends :)</string>#

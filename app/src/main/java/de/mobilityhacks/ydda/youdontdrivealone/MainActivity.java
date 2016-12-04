@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 import de.mobilityhacks.ydda.youdontdrivealone.backend.persons.Person;
+import de.mobilityhacks.ydda.youdontdrivealone.fragments.DrivingFr;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.QuestsFr;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.RankingFr;
 import de.mobilityhacks.ydda.youdontdrivealone.utils.ProfilePictureView;
@@ -50,8 +51,12 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Fragment f = new DrivingFr();
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.content_frame, f);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
@@ -63,7 +68,7 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(0);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         //Now load facebook data
 
@@ -74,7 +79,7 @@ public class MainActivity extends AppCompatActivity
             userNameText.setText(getIntent().getStringExtra("name").toString() + " " +
                     getIntent().getStringExtra("surname").toString());
             you = new Person(getIntent().getStringExtra("name")+ " " + getIntent().getStringExtra("surname"), "");
-            you.setAbsoluteXp(new Random().nextInt(120));
+            you.setAbsoluteXp(new Random().nextInt(80));
         }
 
         if (getIntent().getStringExtra("userId") != null) {
@@ -87,8 +92,11 @@ public class MainActivity extends AppCompatActivity
 
         if (you != null) {
             TextView xpView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_xp);
-            xpView.setText(you.getAbsoluteXp() + " XP");
+            xpView.setText(you.getAbsoluteXp() + " XP | 100 XP");
         }
+
+
+        onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
 
     }
@@ -145,6 +153,9 @@ public class MainActivity extends AppCompatActivity
             f = new RankingFr();
         } else if (id == R.id.questsIt) {
             f = new QuestsFr();
+        }
+        else {
+            f = new RankingFr();
         }
 
         FragmentManager manager = getSupportFragmentManager();

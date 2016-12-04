@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.Random;
 
 import de.mobilityhacks.ydda.youdontdrivealone.MainActivity;
 import de.mobilityhacks.ydda.youdontdrivealone.R;
@@ -54,14 +57,25 @@ public class QuestsFr extends Fragment{
         View socialLayout = inflater.inflate(R.layout.layout_quest, (LinearLayout)
                 viewInflate.findViewById(R.id.quests_container), false);
 
-        ((TextView) privateLayout.findViewById(R.id.quest_title)).setText(friendsQuest.getName());
-        ((TextView) socialLayout.findViewById(R.id.quest_title)).setText(friendsQuest.getName());
+        ((TextView) privateLayout.findViewById(R.id.quest_title)).setText(friendsQuest.getName()
+                + " - " + privateQuest.getType());
+        ((TextView) socialLayout.findViewById(R.id.quest_title)).setText(friendsQuest.getName()
+                + " - " + friendsQuest.getType());
 
         ((TextView) privateLayout.findViewById(R.id.quest_description)).setText(friendsQuest.getDescription());
         ((TextView) socialLayout.findViewById(R.id.quest_description)).setText(friendsQuest.getDescription());
 
         ((LinearLayout) viewInflate.findViewById(R.id.quests_container)).addView(privateLayout);
         ((LinearLayout) viewInflate.findViewById(R.id.quests_container)).addView(socialLayout);
+
+        ((ProgressBar) privateLayout.findViewById(R.id.quest_progress_bar)).setProgress(33);
+
+        ((TextView) privateLayout.findViewById(R.id.quest_progress_text)).setText(
+                privateQuest.getXp() + " XP");
+        ((TextView) socialLayout.findViewById(R.id.quest_progress_text)).setText(
+                friendsQuest.getXp() + " XP");
+
+
         return viewInflate;
     }
 }

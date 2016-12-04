@@ -76,4 +76,6 @@ public abstract class Quest {
     public void setPersonsAssignedTo(List<Person> personsAssignedTo) {
         this.personsAssignedTo = personsAssignedTo;
     }
+
+
 }

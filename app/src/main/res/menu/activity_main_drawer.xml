@@ -7,9 +7,11 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/rankingIt"
+                    android:icon="@drawable/ranking"
                     android:title="@string/ranking" />
                 <item
                     android:id="@+id/questsIt"
+                    android:icon="@drawable/list"
                     android:title="@string/quests" />
             </group>
         </menu>

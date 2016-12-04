@@ -34,8 +34,8 @@ public class OTPAdapter
         return value;
     }
 
-    public byte getByteProperty(byte value) {
-        //Hardcoded value (same as short value)
+    public byte getByteProperty(String field, byte value) {
+        //Hardcoded value (same problem as short value)
         return value;
     }
 }

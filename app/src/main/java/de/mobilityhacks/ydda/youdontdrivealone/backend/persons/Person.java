@@ -81,4 +81,12 @@ public class Person {
 	public void setActiveQuests(Map<Quest, Boolean> activeQuests) {
 		this.activeQuests = activeQuests;
 	}
+
+	public Map<Quest, Integer> getQuestXps() {
+		return questXps;
+	}
+
+	public void setQuestXps(Map<Quest, Integer> questXps) {
+		this.questXps = questXps;
+	}
 }

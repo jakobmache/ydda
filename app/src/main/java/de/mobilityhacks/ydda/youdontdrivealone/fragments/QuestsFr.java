@@ -7,12 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import de.mobilityhacks.ydda.youdontdrivealone.R;
-import de.mobilityhacks.ydda.youdontdrivealone.social.Quest;
-import de.mobilityhacks.ydda.youdontdrivealone.social.QuestCreate;
 
 /**
  *
@@ -31,10 +28,6 @@ public class QuestsFr extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        Log.d(TAG, "Before quest creation");
-        //TextView v = (TextView) getView().findViewById(R.id.quest);
-        //t().setText(q.getName() + "" + q.getDesc());
         // Inflate the layout for this fragment
         View viewInflate = inflater.inflate(R.layout.quests_layout, container, false);
 

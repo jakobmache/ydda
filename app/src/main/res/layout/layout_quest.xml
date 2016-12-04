@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <shape xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/quest_background">
+        <stroke android:width="2dp" android:color="@color/colorPrimaryDark" />
+        <padding android:left="2dp"
+            android:top="2dp"
+            android:right="2dp"
+            android:bottom="2dp" />
+        <corners android:radius="5dp" />
+        <solid android:color="@color/colorAccent" />
+    </shape>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/ranking_text_size"
+        android:id="@+id/quest_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/quest_description"/>
+
+</LinearLayout>

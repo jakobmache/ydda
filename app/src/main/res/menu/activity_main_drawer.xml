@@ -10,7 +10,7 @@
                     android:title="@string/ranking" />
                 <item
                     android:id="@+id/questsIt"
-                    android:title="@string/quests" />   
+                    android:title="@string/quests" />
             </group>
         </menu>
     </item>

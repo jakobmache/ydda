@@ -11,14 +11,16 @@ The main mechanic is an experience bar which fills by either driving eco friendl
 By making community a main aspect of the gamification part, the user is encouraged to find other people who want to fight climate change as well as build a circle of friends thus creating a snowball system. We used the facebook login system as we can access the friend list and it has almost 1.8 billion monthly users. This way we can take advantage of a big community that already exsists.
 
 # How we built it
-We wanted to create an android app. And intended to use OTP for getting our information.
+Our main tool creating this app was Android Studion and we also used the Facebook SDK to enable the Facebook Login. The data to calculate the emission was meant be extracted using OTP but was later hardcoded due to problems.
 
 # Challenges we ran into
-(OTP didn't work, not enough android knowledge, idea was too good we didnt want to intimidate enemies)
+Using the OTP didn't work out as we planned, because there were inconviniences when gathering their information in the App, with the server. Implementing a way to connect to your facebook account was a challenge aswell and our lack of experience considering Hackathons also became problematic.
 
 # Accomplishments that we're proud of
-the idea
+The main idea behind our app seems like huge step forward in raising awareness about climate change and actually doing something.       Our two main concepts, gamification and community create huge opportunities as both have proven their power in revolutionizing          the way we interact with the world. Synthesizing a possible solution to reduce CO2 Emission out of these is something we take pride in.
 
 # What we learned
+We gathered a lot of experience about hackathons in general, transforming our ideas efficiently into working technology and tackling larger projects in a group. Programing our app also taught as a lot about Android and Java.
 
 # What's next for YDDA
+Future changes would include another kind of quest which is completed together with every user worldwide, aswell as charts showing the direct impact, you, your friends, and the whole userbase has on their CO2 footprint. The ability to exchange Points for Quest rerolls also crossed our minds several times. 

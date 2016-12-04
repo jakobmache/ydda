@@ -109,9 +109,7 @@ public class MainActivity extends AppCompatActivity
 
         Fragment f = null;
 
-        if (id == R.id.friendsIt) {
-            f = new FriendsFr();
-        } else if (id == R.id.rankingIt) {
+        if (id == R.id.rankingIt) {
             f = new RankingFr();
         } else if (id == R.id.questsIt) {
             f = new QuestsFr();

@@ -1,32 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/home"
-            android:title="@string/home"
-            android:checked="true" />
-        <item
-            android:id="@+id/friendsIt"
-            android:title="@string/friends" />
-        <item
-            android:id="@+id/rankingIt"
-            android:title="@string/ranking" />
-        <item
-            android:id="@+id/questsIt"
-            android:title="@string/quests" />
-    </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/nav_social">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/rankingIt"
+                    android:title="@string/ranking" />
+                <item
+                    android:id="@+id/questsIt"
+                    android:title="@string/quests" />   
+            </group>
         </menu>
     </item>
 

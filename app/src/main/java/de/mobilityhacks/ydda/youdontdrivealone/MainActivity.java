@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.facebook.Profile;
 
+import java.util.List;
 import java.util.Random;
 
 import de.mobilityhacks.ydda.youdontdrivealone.backend.persons.Person;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
 
     public static final String TAG = MainActivity.class.getName();
+
+    private List<Person> persons;
 
     private Person you;
 
@@ -152,8 +155,18 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        if (id == R.id.rankingIt) {
+            persons = ((RankingFr) f).getPersons();
+        }
         return true;
     }
 
+    public Person getYou() {
+        return you;
+    }
 
+    public List<Person> getPersons() {
+        return persons;
+    }
 }

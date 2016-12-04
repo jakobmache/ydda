@@ -7,9 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import de.mobilityhacks.ydda.youdontdrivealone.MainActivity;
 import de.mobilityhacks.ydda.youdontdrivealone.R;
+import de.mobilityhacks.ydda.youdontdrivealone.backend.persons.Person;
+import de.mobilityhacks.ydda.youdontdrivealone.backend.quests.Quest;
+import de.mobilityhacks.ydda.youdontdrivealone.backend.quests.QuestFactory;
 
 /**
  *
@@ -31,22 +36,32 @@ public class QuestsFr extends Fragment{
         // Inflate the layout for this fragment
         View viewInflate = inflater.inflate(R.layout.quests_layout, container, false);
 
-        TextView v = (TextView) viewInflate.findViewById(R.id.quest);
-        //Quest q = QuestCreate.createQuest(getContext());
+        Quest privateQuest = QuestFactory.createRandomQuest(getContext(), Quest.TYPE_SINGLE);
+        Quest friendsQuest = QuestFactory.createRandomQuest(getContext(), Quest.TYPE_SOCIAL);
 
-        //v.setText(q.getName() + "" + q.getDesc());
+        privateQuest.addPerson(((MainActivity) getActivity()).getYou());
+        friendsQuest.addPerson(((MainActivity) getActivity()).getYou());
 
-        //v.setText("aaaaaaaaaaaa");
+        //It's a quest for all - normally we need more checks here and more quests
+        if (((MainActivity)getActivity()).getPersons() != null){
+            for (Person person :((MainActivity) getActivity()).getPersons()) {
+                friendsQuest.addPerson(person);
+            }
+        }
+
+        View privateLayout = inflater.inflate(R.layout.layout_quest, (LinearLayout)
+                viewInflate.findViewById(R.id.quests_container), false);
+        View socialLayout = inflater.inflate(R.layout.layout_quest, (LinearLayout)
+                viewInflate.findViewById(R.id.quests_container), false);
+
+        ((TextView) privateLayout.findViewById(R.id.quest_title)).setText(friendsQuest.getName());
+        ((TextView) socialLayout.findViewById(R.id.quest_title)).setText(friendsQuest.getName());
+
+        ((TextView) privateLayout.findViewById(R.id.quest_description)).setText(friendsQuest.getDescription());
+        ((TextView) socialLayout.findViewById(R.id.quest_description)).setText(friendsQuest.getDescription());
+
+        ((LinearLayout) viewInflate.findViewById(R.id.quests_container)).addView(privateLayout);
+        ((LinearLayout) viewInflate.findViewById(R.id.quests_container)).addView(socialLayout);
         return viewInflate;
     }
-    public TextView t() {
-        TextView v = (TextView) getView().findViewById(R.id.quest);
-        return v;
-    }
-    /*public void showQuests() {
-        Quest q = QuestCreate.createQuest();
-        View test = getView().findViewById(R.id.quest);
-        TextView test2 = (TextView) test;
-        test2.setText(q.getName());
-    }*/
 }

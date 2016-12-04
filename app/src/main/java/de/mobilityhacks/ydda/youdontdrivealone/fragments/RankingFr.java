@@ -120,6 +120,14 @@ public class RankingFr extends ListFragment {
                     }
                 }).executeAsync();
     }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
 }
 
 

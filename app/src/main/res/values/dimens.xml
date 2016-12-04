@@ -7,6 +7,6 @@
     <dimen name="activity_vertical_margin">3dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="ranking_text_size">30sp</dimen>
+    <dimen name="ranking_text_size">22sp</dimen>
     <dimen name="ranking_name_size">18sp</dimen>
 </resources>

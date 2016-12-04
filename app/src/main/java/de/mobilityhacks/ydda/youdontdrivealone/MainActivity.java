@@ -17,7 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import de.mobilityhacks.ydda.youdontdrivealone.fragments.FriendsFr;
+import com.facebook.Profile;
+
+import java.util.List;
+import java.util.Random;
+
+import de.mobilityhacks.ydda.youdontdrivealone.backend.persons.Person;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.QuestsFr;
 import de.mobilityhacks.ydda.youdontdrivealone.fragments.RankingFr;
 import de.mobilityhacks.ydda.youdontdrivealone.utils.ProfilePictureView;
@@ -25,7 +30,13 @@ import de.mobilityhacks.ydda.youdontdrivealone.utils.ProfilePictureView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private NavigationView navigationView;
+
     public static final String TAG = MainActivity.class.getName();
+
+    private List<Person> persons;
+
+    private Person you;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +61,9 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(0);
 
         //Now load facebook data
 
@@ -61,6 +73,8 @@ public class MainActivity extends AppCompatActivity
                     findViewById(R.id.username);
             userNameText.setText(getIntent().getStringExtra("name").toString() + " " +
                     getIntent().getStringExtra("surname").toString());
+            you = new Person(getIntent().getStringExtra("name")+ " " + getIntent().getStringExtra("surname"), "");
+            you.setAbsoluteXp(new Random().nextInt(120));
         }
 
         if (getIntent().getStringExtra("userId") != null) {
@@ -68,7 +82,25 @@ public class MainActivity extends AppCompatActivity
                     findViewById(R.id.user_image_view);
             imageView.setProfileId(getIntent().getStringExtra("userId"));
             imageView.setPresetSize(ProfilePictureView.CUSTOM);
+            if (you != null) you.setUserID(getIntent().getStringExtra("userId"));
         }
+
+        if (you != null) {
+            TextView xpView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_xp);
+            xpView.setText(you.getAbsoluteXp() + " XP");
+        }
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ProfilePictureView imageView = (ProfilePictureView) navigationView.getHeaderView(0).
+                findViewById(R.id.user_image_view);
+        imageView.setProfileId(Profile.getCurrentProfile().getId());
+        imageView.setPresetSize(ProfilePictureView.CUSTOM);
     }
 
     @Override
@@ -123,7 +155,18 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        if (id == R.id.rankingIt) {
+            persons = ((RankingFr) f).getPersons();
+        }
         return true;
     }
 
+    public Person getYou() {
+        return you;
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
 }
